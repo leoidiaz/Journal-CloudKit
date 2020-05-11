@@ -61,10 +61,6 @@ class EntryController {
         }
     }
     
-    func updateEntry(){
-        
-    }
-    
     func deleteEntry(){
         
     }

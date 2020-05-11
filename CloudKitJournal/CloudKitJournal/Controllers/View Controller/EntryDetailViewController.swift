@@ -34,13 +34,21 @@ class EntryDetailViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let title = titleTextField.text, !title.isEmpty, let body = bodyTextView.text, !body.isEmpty else { return }
         
-        EntryController.shared.createEntryWith(title: title, body: body) { (_) in
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+        if let entry = entry {
+            EntryController.shared.saveEntry(entry: entry) { (_) in
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        } else {
+            EntryController.shared.createEntryWith(title: title, body: body) { (_) in
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
-        
     }
+    
     @IBAction func mainViewTapped(_ sender: Any) {
         bodyTextView.resignFirstResponder()
         titleTextField.resignFirstResponder()
